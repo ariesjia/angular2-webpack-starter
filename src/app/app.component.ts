@@ -20,7 +20,7 @@ import { RouterActive } from './router-active';
   encapsulation: ViewEncapsulation.None,
   styles: [
     require('normalize.css'),
-    require('./app.css')
+    require('./app.scss')
   ],
   template: `
     <md-content>

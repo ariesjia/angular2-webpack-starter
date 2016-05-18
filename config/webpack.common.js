@@ -3,8 +3,8 @@
  */
 
 const webpack = require('webpack');
+const cssnano = require('cssnano');
 const helpers = require('./helpers');
-
 /*
  * Webpack Plugins
  */
@@ -169,6 +169,10 @@ module.exports = {
         test: /\.css$/,
         loader: 'raw-loader'
       },
+      {
+        test: /\.scss$/,
+        loader: 'raw!postcss!sass?outputStyle=expanded'
+      },
 
       /* Raw loader support for *.html
        * Returns file content as string
@@ -256,6 +260,23 @@ module.exports = {
    *
    * See: https://webpack.github.io/docs/configuration.html#node
    */
+  postcss: [
+    cssnano({
+      autoprefixer: {
+        add: true,
+        remove: true,
+        browsers: ['last 5 versions']
+      },
+      discardComments: {
+        removeAll: true
+      },
+      discardUnused: false,
+      mergeIdents: false,
+      reduceIdents: false,
+      safe: true,
+      sourcemap: true
+    })
+  ],
   node: {
     global: 'window',
     crypto: 'empty',
